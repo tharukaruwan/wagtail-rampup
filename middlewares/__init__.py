@@ -1,0 +1,1 @@
+# Find is it nessory to have __init__.py and app.py
