@@ -1,7 +1,9 @@
 from django.db import models
+from wagtail.snippets.models import register_snippet
 
-# Customerr model
-class Customer(models.Model):
+# Just a python decarator to show snipets in admin panel
+@register_snippet
+class Customer(models.Model):   # Customerr model
     customerId=models.CharField(primary_key=True,max_length=500)
     email=models.EmailField(blank=False,null=False)
     firstName=models.CharField(max_length=500)
@@ -9,3 +11,7 @@ class Customer(models.Model):
     dateOfBirth=models.DateField()
     currencyBalance=models.FloatField()
     pageVisitors=models.IntegerField(blank=True)
+
+    # return string representation of this class
+    def __str__(self):
+        return self.firstName
