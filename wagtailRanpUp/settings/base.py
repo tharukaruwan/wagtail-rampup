@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'search',
     'customer',
     'customerOrder',
+    'advertisements',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
