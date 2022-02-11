@@ -6,6 +6,7 @@ from wagtail.snippets.models import register_snippet
 
 
 class AdvertisementsPage(Page): # Template -> advertisements_page.html (_before uppercase and turn it into lower case)
+    max_count=1 # only one advertisement page
     advertisement_title=models.CharField(max_length=100,default='Advertisement title')
     advertisement_description=models.CharField(max_length=500,default='Advertisement description')
     how_to_donate=models.CharField(max_length=500,default='How to donate')
