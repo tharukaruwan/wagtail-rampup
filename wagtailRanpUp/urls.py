@@ -53,6 +53,11 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += path('__debug__/', include('debug_toolbar.urls')), # django-debug-toolba if in DEBUG mode
+    # below is same as above line
+    # urlpatterns = urlpatterns + [ 
+    #     path('__debug__/', include('debug_toolbar.urls'))
+    # ]
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
@@ -61,6 +66,8 @@ urlpatterns = urlpatterns + [
     path("home/", include(wagtail_urls)),   # Find more about this
     path("home", include(wagtail_urls)),
     path("", include(wagtail_urls)),
+
+    
 
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:

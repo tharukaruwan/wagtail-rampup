@@ -11,6 +11,24 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+INSTALLED_APPS = INSTALLED_APPS + [
+    # "django.contrib.staticfiles",   # not nessory because base.py has
+    "debug_toolbar",
+]
+
+MIDDLEWARE = MIDDLEWARE + [
+    # ...
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # ...
+]
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
+# STATIC_URL = "static/" # not nessory because in base.py STATIC_URL = '/static/'
 
 try:
     from .local import *
