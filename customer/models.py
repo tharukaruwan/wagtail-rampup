@@ -2,6 +2,10 @@ from django.db import models
 from wagtail.snippets.models import register_snippet
 from wagtail.admin.edit_handlers import FieldPanel
 
+# from django import template
+
+# register = template.Library()
+
 # Just a python decarator to show snipets in admin panel
 @register_snippet
 class Customer(models.Model):   # Customerr model
@@ -27,3 +31,11 @@ class Customer(models.Model):   # Customerr model
     # return string representation of this class
     def __str__(self):
         return self.first_name
+
+# Advert snippets
+# @register.inclusion_tag('home/templates/home/home_page.html', takes_context=True)
+# def customers(context):
+#     return {
+#         'customer': Customer.objects.all(),
+#         'request': context['request'],
+#     }

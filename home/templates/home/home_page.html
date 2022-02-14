@@ -1,5 +1,6 @@
-{% extends "base.html" %} <!-- import base template in project templates base.html -->
-{% load static %}
+{% extends "base.html" %}
+<!-- import base template in project templates base.html -->
+{% load static wagtailcore_tags customer_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -9,29 +10,20 @@
 
 {% block content %}
 
-    <h1>{{ page.home_title }}</h1>
-    <h3>{{ page.home_description }}</h3>
+<h1>{{ page.home_title }}</h1>
+<h3>{{ page.home_description }}</h3>
 
-    <h4>customer informations</h4>
-    <table class="table table-striped table-hover">
-        <tr>
-          <th>Customer id</th>
-          <th>First name</th>
-          <th>Email</th>
-          <th>Orders</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Tharuka</td>
-          <td>tharu@gmail.com</td>
-          <td><button type="button" class="btn btn-outline-dark btn-sm">View Orders</button></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Ruwan</td>
-          <td>ruwan@gmail.com</td>
-          <td><button type="button" class="btn btn-outline-dark btn-sm">View Orders</button></td>
-        </tr>
-      </table>
+<h4>customer informations</h4>
+<table class="table table-striped table-hover">
+  <tr>
+    <th>Customer id</th>
+    <th>First name</th>
+    <th>Email</th>
+    <th>Orders</th>
+  </tr>
+  {% customers %}
+</table>
+
+
 
 {% endblock content %}

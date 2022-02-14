@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailcore_tags advertisement_tags %}
 <!-- importing wagtails filters if theirs any model features-->
 
 <!-- {% block body_class %}template-advertisementpage{% endblock %} -->
@@ -10,8 +10,10 @@
 
 {% block content %}
 
-    <h1>{{ page.advertisement_title }}</h1>
-    <h3>{{ page.advertisement_description }}</h3>
-    <h3>{{ page.how_to_donate }}</h3>
+<h1>{{ page.advertisement_title }}</h1>
+<h3>{{ page.advertisement_description }}</h3>
+<h3>{{ page.how_to_donate }}</h3>
+
+{% advertisements %}
 
 {% endblock content %}

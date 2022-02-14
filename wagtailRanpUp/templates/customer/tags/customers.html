@@ -1,0 +1,8 @@
+{% for customer in customers %}
+<tr>
+    <td>{{ customer.customer_id }}</td>
+    <td>{{ customer.first_name }}</td>
+    <td>{{ customer.email }}</td>
+    <td><button type="button" class="btn btn-outline-dark btn-sm">View Orders</button></td>
+</tr>
+{% endfor %}

@@ -1,0 +1,10 @@
+{% for advertisement in advertisements %}
+<div class="card">
+    <h5 class="card-header">{{ advertisement.title }}</h5>
+    <div class="card-body">
+        <!-- <h5 class="card-title">{{ advertisement.title }}</h5> -->
+        <p class="card-text">{{ advertisement.description }}</p>
+        <a href="{{ advertisement.learn_more_link }}" class="btn btn-primary">View more!</a>
+    </div>
+</div>
+{% endfor %}
