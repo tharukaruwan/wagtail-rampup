@@ -60,8 +60,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'corsheaders',
+    'corsheaders',
     'drf_yasg',
+    'users',
 
     # 'middlewares.apps.MiddlewaresConfig', # find is it necessory to register this app?
 ]
@@ -77,7 +78,7 @@ MIDDLEWARE = [
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'middlewares.middlewares.tocken_decode',
 ]
 
@@ -189,3 +190,5 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+AUTH_USER_MODEL = 'users.User'
