@@ -13,18 +13,19 @@ def apiUsers(request):
     # signup
     if request.method == 'POST':
         # firebase register
-        user=registerUser(request.data["email"],request.data["password"])
-        if user["status"]=='error':
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # user=registerUser(request.data["email"],request.data["password"])
+        # if user["status"]=='error':
+        #     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        request.data["id"]=user["id"]
+        # request.data["id"]=user["id"]
         serializer=UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            data={  'id':serializer.data["id"],
-                    'email':serializer.data["email"],
-                    'accessTocken':user["idToken"],
-                    'refreshToken':user["refreshToken"] }
+            data={ 'email':serializer.data["email"] }
+            # data={  'id':serializer.data["id"],
+            #         'email':serializer.data["email"],
+            #         'accessTocken':user["idToken"],
+            #         'refreshToken':user["refreshToken"] }
             return Response(data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
