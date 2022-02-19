@@ -32,6 +32,9 @@ urlpatterns = [
     path('customer-api/',include('customer.urls')),
     path('order-api/',include('customerOrder.urls')),
 
+    #jwt testing for users endpoints
+    path('users-api/',include('account.urls')),
+
     path('api/v2/', api_router.urls),
     path('django-admin/', admin.site.urls),
 

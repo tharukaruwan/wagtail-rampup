@@ -28,7 +28,8 @@ firebase_app = firebase_admin.initialize_app(firebase_cred)
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 
-# Application definition
+# Overwrite defalunt authentication model
+AUTH_USER_MODEL='account.Account'
 
 INSTALLED_APPS = [
     'home',
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'customer',
     'customerOrder',
     'advertisements',
+    'account',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -60,11 +62,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'corsheaders',
+    'rest_framework.authtoken',
+    'corsheaders',
     'drf_yasg',
 
     # 'middlewares.apps.MiddlewaresConfig', # find is it necessory to register this app?
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
+}
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,9 +89,10 @@ MIDDLEWARE = [
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'middlewares.middlewares.tocken_decode',
 ]
+
 
 ROOT_URLCONF = 'wagtailRanpUp.urls'
 
