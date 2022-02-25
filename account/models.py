@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+from django.contrib.auth.hashers import make_password
+
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
@@ -43,13 +45,13 @@ class Account(AbstractUser):
     username=models.CharField(max_length=30,unique=True)
     date_joined=models.DateTimeField(verbose_name='date joined',auto_now_add=True)
     last_login=models.DateTimeField(verbose_name='last login',auto_now=True)
-    is_admin=models.BooleanField(default=False)
+    is_admin=models.BooleanField(default=True)
     is_active=models.BooleanField(default=True)
-    is_staff=models.BooleanField(default=False)
-    is_superuser=models.BooleanField(default=False)
+    is_staff=models.BooleanField(default=True)
+    is_superuser=models.BooleanField(default=True)
     hide_email=models.BooleanField(default=True)
 
-    object=AccountManager()
+    object=AccountManager()   
 
     # USERNAME_FIELD='email'
     # REQUIRED_FIELD=[]
@@ -58,22 +60,40 @@ class Account(AbstractUser):
     def __str__(self):
         return self.username
     
-    def has_perm(self,perm,obj=None):
-        return self.is_admin
+    # def has_perm(self,perm,obj=None):
+    #     return self.is_admin
     
-    def has_module_perms(self,app_label):
-        return True
+    # def has_module_perms(self,app_label):
+    #     return True
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+@receiver(pre_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     print('TOCKEN CREATING')
-    print('sender=>',sender)
-    print('sender.email=>',sender.email)
+    print('sender=>',instance)
+    print('sender.email=>',instance.email)
     print('sender.username=>',sender.username)
-    print('sender.password=>',sender.password)
+    print('sender.password=>',instance.password)
     if created:
         print('instance=>',instance)
         print('instance.email=>',instance.email)
         print('instance.password=>',instance.password)
         Token.objects.create(user=instance)
         print('TOCKEN CREATED')
+
+# @receiver(pre_save, sender=Account,weak=False)
+# def create_auth_token(sender, instance=None, created=False, **kwargs):
+#     print('NEW USER')
+#     # preavious=kwargs['email']
+#     current=instance.password
+#     # print('preavious=>',preavious)
+#     print('current=>',current)
+#     pass 
+        
+        
+    # if created:
+    #     print('instance=>',instance)
+    #     print('instance.email=>',instance.email)
+    #     print('instance.password=>',instance.password)
+    #     Token.objects.create(user=instance)
+    #     print('TOCKEN CREATED')

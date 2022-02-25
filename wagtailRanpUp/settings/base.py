@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'customerOrder',
     'advertisements',
     'account',
+    'authentication',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'authentication.authentication.userAuthentication',
     ],
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
@@ -128,6 +130,10 @@ DATABASES = {
         'PORT': os.environ.get('PORT'),
     }
 }
+
+# PASSWORD_HASHERS = [
+#     ''
+# ]
 
 
 # Password validation
